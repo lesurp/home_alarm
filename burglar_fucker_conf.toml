@@ -1,0 +1,41 @@
+[Backend]
+# in degrees
+image_rotation = 0
+    [Backend.Endpoints]
+    alarm_off = '/alarm_off'
+    alarm_on = '/alarm_on'
+    alarm_restart = '/alarm_restart'
+    video = '/video'
+    root = '/'
+
+    [Backend.Connection]
+    port = 3000
+    ip = '127.0.0.1'
+
+[Detection]
+    [Detection.MovingAverage]
+    # the moving average will have the k latest frames represent p% of the average weights
+    k = 60
+    p = 0.7
+
+    [Detection.Activation]
+    # minimum brightness difference between two pixels, to count them as having moved
+    # the greater, the larger is required to trigger the alarm
+    brightness_threshold = 40
+
+    # the movement cost-function is based on a sliding window of the last nth frames
+    # the wider, the longer movement is required to trigger the alarm
+    sliding_window_size = 10
+
+    # min average percentage (over all frames in the window) of average activated pixels (within each frame)
+    # e.g. if 0.05, on average, frames in the sliding window had more than 5% of their pixel moved (based on brightness)
+    average_moved_pixel_ratio = 0.05
+
+[Alarm]
+# time (s) before alarm fires
+buffer_before_alarm = 5.0
+# time (s) taken to interpolate volume from 0% to 100%
+volume_buildup_duration = 5.0
+# time (s) before alarm stops, even without any user interaction
+max_ringing_time = 10.0
+volume_multiplier = 0.2

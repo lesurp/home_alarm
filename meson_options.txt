@@ -1,0 +1,1 @@
+option('static_linking', type : 'boolean', value : false)

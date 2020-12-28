@@ -1,0 +1,6 @@
+build/
+resources/
+subprojects/packagecache
+subprojects/spdlog-1.8.1
+subprojects/tomlpp
+subprojects/boost_1_75_0
